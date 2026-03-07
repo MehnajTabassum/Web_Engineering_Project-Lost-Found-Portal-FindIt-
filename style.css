@@ -1,0 +1,140 @@
+*{
+    margin: 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#form2{
+    display: none;
+}
+
+fieldset{
+    border: none;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px 3px rgb(243, 221, 221);
+    margin: 20px;
+    width: 30%;
+    padding: 20px;
+}
+
+input, select{
+    border: 1px solid rgb(243, 198, 198);
+    border-radius: 10px;
+    padding: 5px;
+}
+
+p{
+    margin-left: 20px;
+}
+
+.nav{
+    height: 80px;
+    background-color: burlywood;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+}
+
+.logo h1{
+    color: black;
+}
+
+.search input{
+    border: none;
+    border-radius: 10px;
+    padding: 7px;
+}
+
+.links{
+    width: 16%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.links a{
+    text-decoration: none;
+    color: black;
+}
+
+.hero{
+    height: 400px;
+    background-image: url("background.jpg");
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.button button{
+    border: none;
+    border-radius: 10px;
+    padding: 7px;
+    margin: 7px;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.button button:hover{
+    background-color: green;
+    color: white;
+}
+
+.com{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 20px;
+}
+
+.com p{
+    text-align: justify;
+}
+
+.head h1{
+    margin: 10px;
+    text-align: center;
+}
+
+.cards{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    margin: 20px;
+}
+
+.card{
+    height: 300px;
+    width: 26%;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px 3px rgb(179, 228, 179);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card img{
+    height: 120px;
+    width: 50%;
+    border-radius: 50%;
+    box-shadow: 3px 3px 3px 3px rgb(228, 247, 228);
+
+}
+
+.card p{
+    text-align: justify;
+    padding: 10px;
+}
+
+.footer{
+    height: 40px;
+    background-color: rgb(4, 4, 46);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lost & Found Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!--LOGIN FORM -->
+    <form id="form1" autocomplete="on" onsubmit="return validation()">
+        <fieldset>
+            <label for="uname">Username</label>
+            <input type="text" name="uname" id="uname" autofocus>
+            <br><br>
+
+            <label for="loginPass">Password</label>
+            <input type="password" id="loginPass">
+            <span id="eCA"></span>
+            <span id="eSA"></span>
+            <span id="eD"></span>
+            <span id="eSC"></span>
+            <br><br>
+
+            <input type="submit" value="Log in">
+        </fieldset>
+    </form>
+
+    <!--REGISTRATION FORM-->
+    <form id="form2" onsubmit="return test()" style="display:none;">
+        <fieldset>
+            <label for="fname">First Name</label>
+            <input type="text" name="fname" id="fname">
+            <span id="efname"></span>
+            <br><br>
+
+            <label for="lname">Last Name</label>
+            <input type="text" name="lname" id="lname">
+            <span id="elname"></span>
+            <br><br>
+
+            <label for="dob">Date of Birth</label>
+            <input type="date" name="dob" id="dob">
+            <br><br>
+
+            <label for="con">Contact</label>
+            <input type="text" name="con" id="con" maxlength="11">
+            <span id="eCon"></span>
+            <br><br>
+
+            <label for="regPass">Password</label>
+            <input type="password" id="regPass">
+            <span id="eRegPass"></span>
+            <br><br>
+
+            <input type="submit" value="Register" id="x">
+        </fieldset>
+    </form>
+
+    <!--TOGGLE LINK-->
+    <p id="convention">
+        don't have an account? <a href="#" onclick="registration()">Register</a>
+    </p>
+
+    <script src="script.js"></script>
+</body>
+</html>
