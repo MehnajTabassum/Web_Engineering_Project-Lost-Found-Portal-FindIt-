@@ -1,11 +1,18 @@
-<?php include("connection.php"); ?>
+<?php
+include("connection.php");
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Items</title>
+    <title>Search Items</title>
     <link rel="stylesheet" href="style.css">
     <style>
         body {
@@ -33,10 +40,11 @@
             display: flex;
             justify-content: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
         .search-section input {
             padding: 10px;
-            width: 300px;
+            width: 350px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
@@ -48,6 +56,7 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 14px;
+            font-weight: bold;
         }
         .search-section button:hover {
             background-color: #0066a1;
@@ -71,19 +80,10 @@
         table tr:hover {
             background-color: #f9f9f9;
         }
-        table a {
-            color: #008CBA;
-            text-decoration: none;
-            margin-right: 5px;
-        }
-        table a:hover {
-            text-decoration: underline;
-            color: #0066a1;
-        }
         .empty-message {
             text-align: center;
             color: #999;
-            padding: 20px;
+            padding: 40px;
             font-size: 16px;
         }
         .dashboard-link {
@@ -98,72 +98,85 @@
             text-decoration: none;
             border-radius: 4px;
             font-size: 14px;
+            font-weight: bold;
         }
         .dashboard-link a:hover {
             background-color: #45a049;
+        }
+        .user-info {
+            text-align: right;
+            margin-bottom: 20px;
+            color: #666;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Lost & Found Items</h1>
+        <div class="user-info">
+            Welcome, <strong><?php echo $_SESSION['user']; ?></strong>
+        </div>
         
+        <h1>Search Items</h1>
+
         <div class="search-section">
             <form method="get">
-                <input type="text" name="search" placeholder="Search item by title...">
+                <input type="text" name="search" placeholder="Search by title or description..." required>
                 <button type="submit">Search</button>
             </form>
         </div>
 
         <?php
-        $search = "";
-
         if (isset($_GET['search'])) {
             $search = $_GET['search'];
-            $query = "SELECT * FROM items WHERE title LIKE '%$search%'";
-        } else {
-            $query = "SELECT * FROM items";
-        }
 
-        $result = mysqli_query($conn, $query);
-        $count = mysqli_num_rows($result);
+            $query = "SELECT * FROM items 
+        WHERE title LIKE '%$search%' 
+        OR description LIKE '%$search%'";
 
-        if ($count > 0) {
+            $result = mysqli_query($conn, $query);
+            $count = mysqli_num_rows($result);
+
+            if ($count > 0) {
         ?>
-            <table>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Status</th>
-                    <th>Contact</th>
-                    <th>Actions</th>
-                </tr>
-
-                <?php
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $statusColor = ($row['status'] == 'Lost') ? '#ff9999' : '#99ff99';
-                    ?>
+                <table>
                     <tr>
-                        <td><strong><?php echo $row['title']; ?></strong></td>
-                        <td><?php echo substr($row['description'], 0, 50) . '...'; ?></td>
-                        <td><?php echo $row['category']; ?></td>
-                        <td style="background-color: <?php echo $statusColor; ?>; text-align: center;">
-                            <strong><?php echo $row['status']; ?></strong>
-                        </td>
-                        <td><?php echo $row['contact']; ?></td>
-                        <td>
-                            <a href="edit.php?id=<?php echo $row['id']; ?>">Edit</a> |
-                            <a href="delete.php?id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this item?')">Delete</a>
-                        </td>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Contact</th>
                     </tr>
-                <?php } ?>
-            </table>
-        <?php
+
+                    <?php
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $statusColor = ($row['status'] == 'Lost') ? '#ff9999' : '#99ff99';
+                        ?>
+                        <tr>
+                            <td><strong><?php echo $row['title']; ?></strong></td>
+                            <td><?php echo substr($row['description'], 0, 50) . '...'; ?></td>
+                            <td><?php echo $row['category']; ?></td>
+                            <td style="background-color: <?php echo $statusColor; ?>; text-align: center;">
+                                <strong><?php echo $row['status']; ?></strong>
+                            </td>
+                            <td><?php echo $row['contact']; ?></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </table>
+            <?php
+            } else {
+            ?>
+                <div class="empty-message">
+                    <p>No items found matching your search. Try different keywords!</p>
+                </div>
+            <?php
+            }
         } else {
         ?>
             <div class="empty-message">
-                <p>No items found. Try a different search or <a href="dashboard.php">go back to dashboard</a></p>
+                <p>Enter search terms to find items...</p>
             </div>
         <?php
         }

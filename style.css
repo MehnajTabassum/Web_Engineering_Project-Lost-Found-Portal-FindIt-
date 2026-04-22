@@ -3,19 +3,6 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-#form2{
-    display: none;
-}
-
-fieldset{
-    border: none;
-    border-radius: 20px;
-    box-shadow: 3px 3px 3px 3px rgb(243, 221, 221);
-    margin: 20px;
-    width: 30%;
-    padding: 20px;
-}
-
 input, select{
     border: 1px solid rgb(243, 198, 198);
     border-radius: 10px;
@@ -39,23 +26,19 @@ p{
     color: black;
 }
 
-.search input{
+.search-area input {
+    padding: 8px;
+    border-radius: 20px;
     border: none;
-    border-radius: 10px;
-    padding: 7px;
+    outline: none;
 }
 
-.links{
-    width: 16%;
-    display: flex;
-    justify-content: space-between;
+.search-area button {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
 }
-
-.links a{
-    text-decoration: none;
-    color: black;
-}
-
 .hero{
     height: 400px;
     background-image: url("background.png");
@@ -77,7 +60,7 @@ p{
 }
 
 .button button:hover{
-    background-color: green;
+    background-color: orangered;
     color: white;
 }
 
